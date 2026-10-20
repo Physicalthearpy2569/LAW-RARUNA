@@ -1,5 +1,5 @@
 // ท่องมาตรา: เก็บแอปไว้ในเครื่องให้เปิดได้แม้ไม่มีเน็ต
-const VERSION = "tm-2569-10-20";
+const VERSION = "tm-2569-10-20e";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
