@@ -76,10 +76,18 @@ nav.tabs button:not([aria-selected="true"]){color:var(--c);border-color:color-mi
 /* filter strip */
 .filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 #fStar{color:var(--gold);font-weight:600}
+.filters{gap:6px}.filters select{padding:4px 8px;font-size:13px;border-radius:8px;min-height:32px}
+.search input{padding:5px 10px;font-size:13px;border-radius:8px}
+#tPick{font-size:13px;padding:3px 4px!important;max-width:120px!important}
+.seg button{white-space:nowrap}
+.row.trow{flex-wrap:nowrap;gap:6px}.trow .seg{flex-wrap:nowrap}
+@media (max-width:345px){.row.trow{flex-wrap:wrap}}
+@media (max-width:560px){#tPick{max-width:76px!important;min-width:50px;flex:0 1 76px}#tStyle button{padding:3px 7px}.card{padding:14px}.tbar{gap:4px}.tbar .btn.sm{padding:5px 8px}}
+#tRand{padding:3px 9px;font-size:12.5px}
 .filters select,.search input,.field input,.field select,.field textarea{width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
 .search{display:flex;gap:8px}
 .search input{flex:1}
-@media (max-width:560px){.filters{grid-template-columns:1fr 1fr}.filters select:first-child,#fStar{grid-column:1/-1}}
+@media (max-width:560px){.filters{grid-template-columns:1fr 1fr}}
 
 .panel{display:flex;flex-direction:column;gap:12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -119,9 +127,15 @@ nav.tabs button:not([aria-selected="true"]){color:var(--c);border-color:color-mi
 @keyframes pulse{50%{opacity:.6}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 textarea.note{width:100%;min-height:64px;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical}
-.typebox{width:100%;min-height:180px;font-family:var(--f-law);font-size:16px;line-height:1.8;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+.typebox{width:100%;min-height:92px;max-height:42vh;overflow:auto;font-family:var(--f-law);font-size:16px;line-height:1.8;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
 .score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .score b{font-family:var(--f-num);font-size:44px;line-height:1}
+.tscore{gap:8px;align-items:center}.tscore b{font-size:26px}
+.thead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.tsec{font-family:var(--f-num);font-weight:700;font-size:20px;color:var(--navy);white-space:nowrap}.thead .crumb{font-size:12px}
+.tbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+#tRes{display:flex;flex-direction:column;gap:6px}#tRes:empty{display:none}
+#tRes .diff{font-size:15.5px;line-height:1.8;padding:10px 12px}
+.miss-k{color:var(--bad);text-decoration:underline wavy;text-underline-offset:3px}
 .diff{font-family:var(--f-law);font-size:16px;line-height:1.95;white-space:pre-wrap;word-break:break-word;background:var(--sunk);border-radius:10px;padding:12px}
 .diff .miss{background:var(--bad-soft);color:var(--bad);text-decoration:underline wavy;text-underline-offset:4px}
 .diff .extra{color:var(--warn);text-decoration:line-through}
@@ -134,7 +148,7 @@ textarea.note{width:100%;min-height:64px;background:var(--sunk);border:1px solid
 .choice.r{border-color:var(--ok);background:var(--ok-soft)}
 .choice.w{border-color:var(--bad);background:var(--bad-soft)}
 .seg{display:flex;gap:4px;flex-wrap:wrap}
-.seg button{border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 11px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.seg button{border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:3px 9px;font-size:12.5px;font-weight:600;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--teal);color:var(--on-accent);border-color:transparent}
 
 /* stage map */
@@ -238,7 +252,7 @@ a{color:var(--navy)}
     <select id="fLaw" aria-label="กฎหมาย/บรรพ"></select>
     <select id="fTitle" aria-label="ลักษณะ"></select>
     <select id="fChap" aria-label="หมวด"></select>
-    <select id="fStar" aria-label="ดาวสถิติข้อสอบ"><option value="0">ทุกมาตรา (ไม่กรองดาว)</option><option value="1">เคยออกสอบ ★1 ขึ้นไป</option><option value="3">ออกบ่อย ★3 ขึ้นไป</option><option value="4">ออกบ่อยมาก ★4 ขึ้นไป</option><option value="5">ออกบ่อยที่สุด ★5</option></select>
+    <select id="fStar" aria-label="ดาวสถิติข้อสอบ"><option value="0">☆ ทุกดาว</option><option value="1">★1+ เคยออก</option><option value="3">★3+ บ่อย</option><option value="4">★4+ บ่อยมาก</option><option value="5">★5 บ่อยสุด</option></select>
   </div>
   <div class="search">
     <input id="q" type="search" placeholder="พิมพ์เลขมาตรา เช่น 420 เพื่อไปมาตรานั้นในแท็บนี้ หรือพิมพ์คำเพื่อค้นในคลัง" enterkeyhint="go" autocomplete="off">
@@ -611,20 +625,22 @@ function clip(t,n){t=t.replace(/\s+/g," ");return t.length>n?t.slice(0,n)+"…":
 const TYPE={k:null,style:"full",input:"",result:null};
 function viewType(v){const L=scope().filter(s=>!s.rep);if(!L.length&&!TYPE.k)return emptyScope(v);
   if(!TYPE.k||!SEC.get(TYPE.k))TYPE.k=pickNext(L);const s=SEC.get(TYPE.k);
-  v.innerHTML=`<div class="card"><div class="row"><div class="seg" id="tStyle">${[["full","พิมพ์ทั้งมาตรา"],["cloze","เติมคำที่หายไป"],["num","ทายเลขมาตรา"]].map(([k,l])=>`<button data-s="${k}" aria-pressed="${TYPE.style===k}">${l}</button>`).join("")}</div><span class="spacer"></span>
+  v.innerHTML=`<div class="card"><div class="row trow"><div class="seg" id="tStyle">${[["full","พิมพ์เต็ม"],["cloze","เติมคำ"],["num","ทายเลข"]].map(([k,l])=>`<button data-s="${k}" aria-pressed="${TYPE.style===k}">${l}</button>`).join("")}</div><span class="spacer"></span>
     <select id="tPick" aria-label="เลือกมาตรา" style="max-width:160px;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;padding:5px">${L.map(x=>`<option value="${esc(x.k)}" ${x.k===s.k?"selected":""}>ม.${th(x.no)}${P.cards[x.k]?.best!=null?" · "+P.cards[x.k].best+"%":""}</option>`).join("")}</select>
-    <button class="btn sm" id="tRand">สุ่ม</button></div>
+    <button class="btn sm" id="tRand" title="สุ่มมาตรา" aria-label="สุ่มมาตรา">🎲</button></div>
    ${TYPE.style==="num"?`<div class="crumb">${esc(crumb(s))}</div><div class="lawtext">${fmtLaw(bodyText(s))}</div><div class="row"><span>มาตรา</span><input id="tNum" inputmode="numeric" placeholder="เช่น 193/30" style="width:140px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px"><button class="btn teal" id="tCheck">ตรวจ</button></div><div id="tRes"></div>`
-   :`<div class="secno"><small>${esc(lawShort(s))}</small>มาตรา ${th(s.no)}</div><div class="crumb">${esc(crumb(s))}</div>
+   :`<div class="thead"><span class="tsec">มาตรา ${th(s.no)}</span><span class="crumb">${esc(crumb(s))}</span></div>
      ${TYPE.style==="full"?`<textarea class="typebox" id="tIn" placeholder="พิมพ์ตัวบทจากความจำ ไม่ต้องพิมพ์คำว่า 'มาตรา' และเลขมาตรา เว้นวรรคไม่นับ">${esc(TYPE.input)}</textarea>`:`<div class="lawtext cloze" id="tCloze">${clozeHTML(s)}</div>`}
-     <div class="row"><button class="btn teal" id="tCheck">ตรวจคำตอบ</button><button class="btn" id="tHint">ใบ้ 10 ตัวอักษรถัดไป</button><span class="spacer"></span><button class="btn ghost" id="tShow">ดูเฉลย</button></div><div id="tRes"></div>`}
+     <div class="tbar"><button class="btn sm teal" id="tCheck">✓ ตรวจ</button><button class="btn sm" id="tHint" title="ใบ้ ๑๐ ตัวอักษรถัดไป">💡 ใบ้</button><button class="btn sm ghost" id="tShow">👁 เฉลย</button><span class="spacer"></span><button class="btn sm ghost" id="tSkip" title="ไปมาตราถัดไป">ถัดไป ›</button></div><div id="tRes"></div>`}
    </div>`;
   v.querySelectorAll("#tStyle button").forEach(b=>b.onclick=()=>{TYPE.style=b.dataset.s;TYPE.result=null;render()});
   $("#tPick").onchange=e=>{TYPE.k=e.target.value;TYPE.input="";CLOZE=null;render()};
   $("#tRand").onclick=()=>{TYPE.k=pickNext(L,true);TYPE.input="";CLOZE=null;render()};
-  const tin=$("#tIn");if(tin){tin.oninput=()=>TYPE.input=tin.value}
+  const tin=$("#tIn");const fit=()=>{if(!tin)return;tin.style.height="auto";tin.style.height=Math.min(tin.scrollHeight+4,Math.round(innerHeight*.42))+"px"};
+  if(tin){tin.oninput=()=>{TYPE.input=tin.value;fit()};fit()}
+  const sk=$("#tSkip");if(sk)sk.onclick=()=>{const L2=scope().filter(x=>!x.rep);const i=L2.findIndex(x=>x.k===s.k);TYPE.k=(L2[i+1]||L2[0]).k;TYPE.input="";TYPE.result=null;CLOZE=null;render()};
   $("#tCheck").onclick=()=>checkType(s);
-  const sh=$("#tShow");if(sh)sh.onclick=()=>{$("#tRes").innerHTML=`<div class="lawtext" style="background:var(--sunk);border-radius:10px;padding:12px">${fmtLaw(bodyText(s))}</div>`};
+  const sh=$("#tShow");if(sh)sh.onclick=()=>{const r=$("#tRes");r.innerHTML=`<div class="lawtext" style="background:var(--sunk);border-radius:10px;padding:10px 12px;font-size:15.5px;line-height:1.8">${fmtLaw(bodyText(s))}</div>`;r.scrollIntoView({behavior:"smooth",block:"nearest"})};
   const hi=$("#tHint");if(hi)hi.onclick=()=>{if(TYPE.style==="full"){const tgt=bodyText(s);const typed=tin.value;const n=norm(typed).length;let cnt=0,i=0;for(;i<tgt.length&&cnt<n;i++)if(!/\s/.test(tgt[i]))cnt++;tin.value=typed+tgt.slice(i,i+10);TYPE.input=tin.value;tin.focus()}
     else{const e=[...document.querySelectorAll("#tCloze input")].find(x=>!x.value);if(e)e.value=e.dataset.a.slice(0,1)}}}
 function pickNext(L,rand){if(rand)return L[Math.random()*L.length|0].k;const w=L.filter(s=>(P.cards[s.k]?.best??-1)<90);return (w[0]||L[0]).k}
@@ -643,10 +659,10 @@ function checkType(s){const res=$("#tRes");
     pct=Math.round(d.lcs/Math.max(tgt.length,got.length)*100);
     let h="",cur=null,buf="";const flush=()=>{if(buf)h+=cur==="="?esc(buf):cur==="-"?`<span class="miss">${esc(buf)}</span>`:`<span class="extra">${esc(buf)}</span>`;buf=""};
     d.ops.forEach(([o,c])=>{if(o!==cur){flush();cur=o}buf+=c});flush();
-    html=`<p class="meta">ตัวที่ขาดหรือพิมพ์ผิด <span class="chip bad">ขีดแดง</span> ตัวที่เกินมา <span class="chip warn">ขีดฆ่า</span></p><div class="diff">${h}</div>`}
+    html=`<div class="diff">${h}</div><p class="meta" style="margin:0;font-size:12px"><span class="miss-k">แดง</span> = ขาด/พิมพ์ผิด · <s>ขีดฆ่า</s> = เกินมา</p>`}
   const c=card(s.k);c.best=Math.max(c.best??0,pct);grade(s.k,pct>=90?2:pct>=60?1:0);gainXP(pct/5);
   const lv=pct>=95?["ok","แม่นมาก"]:pct>=80?["ok","ดี"]:pct>=60?["warn","ใกล้แล้ว"]:["bad","ต้องทวน"];
-  res.innerHTML=`<div class="score"><b class="num" style="color:var(--${lv[0]})">${pct}%</b><span class="chip ${lv[0]}">${lv[1]}</span><span class="meta">ถูก ${pct}% · ผิด/ขาด ${100-pct}% · ดีที่สุด ${c.best}%</span><span class="spacer"></span><button class="btn pri" id="tNext">มาตราถัดไป ›</button></div>${html}`;
+  res.innerHTML=`<div class="score tscore"><b class="num" style="color:var(--${lv[0]})">${pct}%</b><span class="chip ${lv[0]}">${lv[1]}</span><span class="meta">ดีที่สุด ${c.best}%</span><span class="spacer"></span><button class="btn sm pri" id="tNext">ถัดไป ›</button></div>${html}`;const sk0=$("#tSkip");if(sk0)sk0.hidden=true;res.scrollIntoView({behavior:"smooth",block:"nearest"});
   $("#tNext").onclick=()=>{const L=scope();const i=L.findIndex(x=>x.k===s.k);TYPE.k=(L[i+1]||L[0]).k;TYPE.input="";CLOZE=null;render()}}
 let CLOZE=null;
 const KEYW=["โมฆะ","โมฆียะ","สุจริต","บริบูรณ์","ผู้แทนโดยชอบธรรม","นิติกรรม","ความยินยอม","เจตนา","บอกล้าง","สัตยาบัน","อายุความ","ภายใน","ไม่ได้","ย่อม","ต้อง","อาจ","เว้นแต่","โดยอนุโลม","ศาล","ราชกิจจานุเบกษา","หนังสือ","ลายมือชื่อ","ทรัพย์","กรรมสิทธิ์","ค่าสินไหมทดแทน","ละเมิด","ลูกหนี้","เจ้าหนี้","ผิดนัด","ดอกเบี้ย"];
@@ -777,7 +793,7 @@ function viewGuess(v){
       ${secs.map(s=>`<details class="gsec"><summary><b>มาตรา ${th(s.no)}</b> ${starHTML(secStar(s.no))} <span class="meta">${GD.pc[q.c]?.s[s.no]?`ออก ${th(pctOf(q.c,s.no))}% ของการสอบ ${esc(q.c)} (${th(GD.pc[q.c].s[s.no])}/${th(GD.pc[q.c].t)} ครั้ง)`:`ออกสอบ ${th(STARS[s.no]?.[1]||0)} ข้อ`}</span></summary>
         <div class="lawtext">${fmtLaw(bodyText(s))}</div>${refLine(s)}
         <div class="row"><button class="btn sm" data-gl="${esc(s.k)}">ท่องมาตรานี้</button><button class="btn sm teal" data-gt="${esc(s.k)}">พิมพ์ทดสอบ</button></div></details>`).join("")}</div>`;
-    const foot=isReal?`แนวข้อสอบเก่า ${termTH(q.lab)} · ${esc(q.c)} ${esc(cname(q.c))} · มหาวิทยาลัยรามคำแหง · ที่มา: mjsheetramfree.com`
+    const foot=isReal?""
       :`AI เก็งข้อสอบจากสถิติแนวข้อสอบเก่า ไม่ใช่ข้อสอบเก่า · วิชาแนว ${esc(q.c)} ${esc(cname(q.c))} · ตัวบทอ้างอิงฉบับกฤษฎีกา`;
     qhtml=`<article class="card gq">
       <div class="row"><span title="ดาว = ความถี่ที่มาตราในข้อนี้ปรากฏในแนวข้อสอบเก่า">${starHTML(st)}</span><span class="chip ${isReal?"gold":"aiq"}">${isReal?"แนวข้อสอบเก่า":q.t==="live"?"AI เก็งข้อสอบ (ใหม่)":"AI เก็งข้อสอบ"}</span><span class="spacer"></span><span class="meta">${esc(q.c)} ${esc(cname(q.c))}</span></div>
@@ -786,7 +802,7 @@ function viewGuess(v){
       ${G.fb?`<div class="ai" id="gFb">${esc(G.fb)}</div>`:""}
       <div class="row"><button class="btn pri" id="gShow">${G.shown?"ซ่อนแนวตอบ":"ดูแนวตอบและมาตรา"}</button><button class="btn" id="gNext">สุ่มข้อใหม่ →</button><span class="spacer"></span><span id="gLiveBox"></span></div>
       ${reveal}
-      <p class="ref">${foot}</p></article>`}
+      ${foot?`<p class="ref">${foot}</p>`:""}</article>`}
   v.innerHTML=`<div class="card"><div class="row"><h2 style="margin:0">เก็งข้อสอบ</h2><span class="spacer"></span><span class="meta">${STORE?`เก็งจากสถิติแนวข้อสอบเก่า ${th(GD.papers)} ชุด`:`จากข้อสอบเก่า ${th(GD.papers)} ชุด · ${th(GD.tot)} ข้อ`}</span></div>
       <select id="gC" style="width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px"><option value="">ทุกวิชา (ป.พ.พ.)</option>${courses.map(c=>`<option value="${c}" ${g.c===c?"selected":""}>${c} ${esc(cname(c))}</option>`).join("")}</select>
       <div class="row"><span class="meta" style="min-width:64px">ดาว</span>${segBtns("gMin",[[1,"ทั้งหมด"],[3,"★3 ขึ้นไป"],[4,"★4 ขึ้นไป"],[5,"★5"]],g.min)}</div>
